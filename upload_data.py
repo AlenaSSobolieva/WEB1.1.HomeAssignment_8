@@ -2,11 +2,10 @@
 
 import json
 from mongoengine import connect
-from pymongo import MongoClient  # Add this import
+from pymongo import MongoClient
 from main import Author, Quote
 
 def main():
-    # Replace 'your_connection_string' with your actual MongoDB Atlas connection string
     connection_string = 'mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8'
 
     # Check the connection using pymongo
@@ -17,7 +16,7 @@ def main():
     except Exception as e:
         print("Error connecting to MongoDB using pymongo:", e)
 
-    # Now, connect using mongoengine
+    # Connect using mongoengine
     connect(db='web-8', username='soboleva13as', password='5413034002246',
             host='mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8')
 
@@ -33,7 +32,7 @@ def main():
         # Update the date format and convert the born_date string to a string
         born_date_str = author_data.get('born_date')
         if born_date_str:
-            author_data['born_date'] = born_date_str  # Keep it as a string for StringField
+            author_data['born_date'] = born_date_str
 
         author = Author(**author_data)
         author.save()
@@ -41,7 +40,7 @@ def main():
     for quote_data in quotes_data:
         author = Author.objects(fullname=quote_data['author']).first()
         if 'author' in quote_data:
-            del quote_data['author']  # Remove 'author' key if present
+            del quote_data['author']
         quote = Quote(author=author, **quote_data)
         quote.save()
 

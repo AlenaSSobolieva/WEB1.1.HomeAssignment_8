@@ -57,9 +57,16 @@ class TestMainScript(unittest.TestCase):
 
         saved_quote = Quote.objects(quote=quote_data['quote']).first()
         self.assertIsNotNone(saved_quote)
+
+        # Compare specific attributes of the Author objects
+        self.assertEqual(saved_quote.author.fullname, test_author.fullname)
+        self.assertEqual(saved_quote.author.born_date, test_author.born_date)
+        self.assertEqual(saved_quote.author.born_location, test_author.born_location)
+        self.assertEqual(saved_quote.author.description, test_author.description)
+
         self.assertEqual(saved_quote.tags, quote_data['tags'])
-        self.assertEqual(saved_quote.author, test_author)
         self.assertEqual(saved_quote.quote, quote_data['quote'])
+
 
 if __name__ == '__main__':
     unittest.main()

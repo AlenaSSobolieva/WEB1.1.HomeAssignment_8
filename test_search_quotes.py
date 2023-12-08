@@ -4,7 +4,7 @@ from io import StringIO
 from unittest.mock import patch
 from mongoengine import connect, disconnect
 from main import Author, Quote
-import search_quotes  # Import your search_quotes module
+import search_quotes
 
 class TestSearchQuotes(unittest.TestCase):
 
@@ -13,7 +13,7 @@ class TestSearchQuotes(unittest.TestCase):
         # Connect to the main application database
         connect(
             db='test_db',
-            alias='default',  # Explicitly specify the alias for the default connection
+            alias='default',
             username='soboleva13as',
             password='5413034002246',
             host='mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8'

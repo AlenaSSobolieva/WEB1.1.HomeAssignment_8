@@ -5,7 +5,6 @@ from main import Quote, Author
 from pymongo import MongoClient
 
 def main():
-    # Replace 'your_connection_string' with your actual MongoDB Atlas connection string
     connection_string = 'mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8'
 
     # Check the connection using pymongo
@@ -16,7 +15,7 @@ def main():
     except Exception as e:
         print("Error connecting to MongoDB using pymongo:", e)
 
-    # Now, connect using mongoengine
+    # Connect using mongoengine
     connect(db='web-8', username='soboleva13as', password='5413034002246',
             host='mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8')
     while True:

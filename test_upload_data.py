@@ -1,9 +1,8 @@
 import unittest
-from mongoengine import connect, disconnect
+from mongoengine import connect
 from unittest.mock import patch
 from io import StringIO
 from main import Author, Quote
-import json
 from upload_data import main
 
 class TestUploadData(unittest.TestCase):
@@ -13,7 +12,7 @@ class TestUploadData(unittest.TestCase):
         # Connect to the test database
         connect(
             db='test_db',
-            alias='default',  # Explicitly specify the alias for the default connection
+            alias='default',
             username='soboleva13as',
             password='5413034002246',
             host='mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8'
@@ -26,7 +25,6 @@ class TestUploadData(unittest.TestCase):
         connection.drop_database('test_db')
 
     def test_upload_data(self):
-        # Replace 'your_connection_string' with your actual MongoDB Atlas connection string
         connection_string = 'mongodb+srv://soboleva13as:5413034002246@cluster0.xpt2wff.mongodb.net/web8'
 
         with patch('builtins.input', return_value=connection_string):
@@ -35,8 +33,6 @@ class TestUploadData(unittest.TestCase):
 
                 output = mock_stdout.getvalue()
                 self.assertIn("Pinged MongoDB using pymongo. Connection successful!", output)
-
-                # Add more assertions based on the expected behavior of your upload_data script
 
                 albert_einstein = Author.objects(fullname="Albert Einstein").first()
                 self.assertIsNotNone(albert_einstein)
